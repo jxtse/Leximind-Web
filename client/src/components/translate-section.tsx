@@ -108,16 +108,16 @@ export function TranslateSection() {
   };
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold text-foreground mb-2">智能翻译与词汇提取</h1>
+    <div className="space-y-6 lg:space-y-8">
+      <div className="text-center lg:text-left">
+        <h1 className="text-2xl lg:text-3xl font-bold text-foreground mb-2">智能翻译与词汇提取</h1>
         <p className="text-muted-foreground">输入单词、词组或短句，获得智能翻译并提取重要词汇到生词本</p>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-8">
+      <div className="grid xl:grid-cols-2 gap-6 lg:gap-8">
         {/* Translation Input */}
-        <Card>
-          <CardContent className="p-6">
+        <Card className="h-fit">
+          <CardContent className="p-6 lg:p-8">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold text-foreground">输入文本</h2>
               <div className="flex space-x-2">
@@ -135,7 +135,7 @@ export function TranslateSection() {
                 placeholder="输入您想要翻译的单词、词组或句子..."
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
-                className="min-h-32 resize-none"
+                className="min-h-36 lg:min-h-40 resize-none"
                 maxLength={500}
               />
               <div className="absolute bottom-3 right-3 text-xs text-muted-foreground">
@@ -203,8 +203,8 @@ export function TranslateSection() {
         </Card>
 
         {/* Translation Result */}
-        <Card>
-          <CardContent className="p-6">
+        <Card className="h-fit">
+          <CardContent className="p-6 lg:p-8">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold text-foreground">翻译结果</h2>
               <Button variant="ghost" size="icon" onClick={copyToClipboard}>
