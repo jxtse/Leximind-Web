@@ -169,13 +169,6 @@ npm run build
 - [Drizzle ORM](https://orm.drizzle.team/) - 类型安全的ORM
 - [Tailwind CSS](https://tailwindcss.com/) - 现代化CSS框架
 
-## 📞 联系方式
-
-如果您有任何问题或建议，请通过以下方式联系：
-
-- 项目Issues: [GitHub Issues](https://github.com/jxtse/Leximind-Web/issues)
-- 邮箱: your.email@example.com
-
 ---
 
 ⭐ 如果这个项目对您有帮助，请给我们一个Star！
