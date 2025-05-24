@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 210 11% 98%; /* #F5F7FA */
+  --foreground: 222 84% 5%; /* #0C1120 */
+  --muted: 210 40% 96%; /* #EFF6FF */
+  --muted-foreground: 215 16% 47%; /* #64748B */
+  --popover: 0 0% 100%; /* #FFFFFF */
+  --popover-foreground: 222 84% 5%; /* #0C1120 */
+  --card: 0 0% 100%; /* #FFFFFF */
+  --card-foreground: 222 84% 5%; /* #0C1120 */
+  --border: 214 32% 91%; /* #E2E8F0 */
+  --input: 214 32% 91%; /* #E2E8F0 */
+  --primary: 239 84% 67%; /* #6366F1 */
+  --primary-foreground: 210 40% 98%; /* #F8FAFC */
+  --secondary: 262 83% 67%; /* #8B5CF6 */
+  --secondary-foreground: 210 40% 98%; /* #F8FAFC */
+  --accent: 162 88% 40%; /* #10B981 */
+  --accent-foreground: 0 0% 100%; /* #FFFFFF */
+  --destructive: 0 84% 60%; /* #EF4444 */
+  --destructive-foreground: 0 0% 100%; /* #FFFFFF */
+  --ring: 239 84% 67%; /* #6366F1 */
+  --radius: 0.5rem;
+  --warning: 43 96% 56%; /* #F59E0B */
+  --error: 0 84% 60%; /* #EF4444 */
+}
+
+.dark {
+  --background: 222 84% 5%; /* #0C1120 */
+  --foreground: 210 40% 98%; /* #F8FAFC */
+  --muted: 217 32% 17%; /* #1E293B */
+  --muted-foreground: 215 16% 57%; /* #94A3B8 */
+  --popover: 224 71% 4%; /* #020817 */
+  --popover-foreground: 210 40% 98%; /* #F8FAFC */
+  --card: 224 71% 4%; /* #020817 */
+  --card-foreground: 210 40% 98%; /* #F8FAFC */
+  --border: 217 32% 17%; /* #1E293B */
+  --input: 217 32% 17%; /* #1E293B */
+  --primary: 239 84% 67%; /* #6366F1 */
+  --primary-foreground: 210 40% 98%; /* #F8FAFC */
+  --secondary: 262 83% 67%; /* #8B5CF6 */
+  --secondary-foreground: 210 40% 98%; /* #F8FAFC */
+  --accent: 162 88% 40%; /* #10B981 */
+  --accent-foreground: 0 0% 100%; /* #FFFFFF */
+  --destructive: 0 62% 30%; /* #B91C1C */
+  --destructive-foreground: 0 0% 100%; /* #FFFFFF */
+  --ring: 239 84% 67%; /* #6366F1 */
+  --warning: 43 96% 56%; /* #F59E0B */
+  --error: 0 84% 60%; /* #EF4444 */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  .nav-tab.active {
+    @apply text-primary border-primary;
+  }
+  
+  .tab-content.hidden {
+    display: none;
+  }
+}
