@@ -1,4 +1,4 @@
-import { Brain, Book, Clock, Lightbulb, Trophy, Menu } from "lucide-react";
+import { Brain, Book, Clock, Lightbulb, Trophy, Menu, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
@@ -60,6 +60,14 @@ export function Navigation({ activeTab, onTabChange, totalWords }: NavigationPro
               <Trophy className="text-warning w-4 h-4 mr-2" />
               <span className="text-sm text-muted-foreground">{totalWords} 词汇</span>
             </div>
+            <Button 
+              variant="ghost" 
+              size="icon"
+              onClick={() => window.open('https://github.com/yourusername/leximind', '_blank')}
+              title="查看GitHub项目"
+            >
+              <Github className="h-5 w-5" />
+            </Button>
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="md:hidden">
@@ -74,6 +82,16 @@ export function Navigation({ activeTab, onTabChange, totalWords }: NavigationPro
                   </div>
                   <div className="flex flex-col space-y-2">
                     <NavItems />
+                  </div>
+                  <div className="pt-4 border-t">
+                    <Button 
+                      variant="ghost" 
+                      className="w-full justify-start"
+                      onClick={() => window.open('https://github.com/yourusername/leximind', '_blank')}
+                    >
+                      <Github className="h-4 w-4 mr-2" />
+                      GitHub项目
+                    </Button>
                   </div>
                 </div>
               </SheetContent>
