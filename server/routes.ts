@@ -13,9 +13,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Translation endpoint
   app.post("/api/translate", async (req, res) => {
     try {
-      const { text, sourceLanguage, targetLanguage } = translationRequestSchema.parse(req.body);
+      const { text, sourceLanguage, targetLanguage, extractWords } = translationRequestSchema.parse(req.body);
       
-      const result = await translateAndExtractWords(text, sourceLanguage, targetLanguage);
+      const result = await translateAndExtractWords(text, sourceLanguage, targetLanguage, extractWords);
       res.json(result);
     } catch (error) {
       console.error("Translation error:", error);

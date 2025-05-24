@@ -6,6 +6,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Mic, Camera, Play, Copy, Plus, Check, ArrowLeftRight } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 import { apiRequest } from "@/lib/queryClient";
 import { TranslationResponse } from "@shared/schema";
 import { vocabularyStorage } from "@/lib/vocabulary-storage";
@@ -14,12 +16,13 @@ export function TranslateSection() {
   const [inputText, setInputText] = useState("");
   const [sourceLang, setSourceLang] = useState("auto");
   const [targetLang, setTargetLang] = useState("zh");
+  const [extractWords, setExtractWords] = useState(true);
   const [result, setResult] = useState<TranslationResponse | null>(null);
   const [addedWords, setAddedWords] = useState<Set<string>>(new Set());
   const { toast } = useToast();
 
   const translateMutation = useMutation({
-    mutationFn: async (data: { text: string; sourceLanguage?: string; targetLanguage: string }) => {
+    mutationFn: async (data: { text: string; sourceLanguage?: string; targetLanguage: string; extractWords: boolean }) => {
       const response = await apiRequest("POST", "/api/translate", data);
       return response.json() as Promise<TranslationResponse>;
     },
@@ -27,7 +30,7 @@ export function TranslateSection() {
       setResult(data);
       toast({
         title: "翻译成功",
-        description: `提取了 ${data.extractedWords.length} 个重要词汇`,
+        description: extractWords ? `提取了 ${data.extractedWords.length} 个重要词汇` : "翻译完成",
       });
     },
     onError: (error) => {
@@ -53,6 +56,7 @@ export function TranslateSection() {
       text: inputText,
       sourceLanguage: sourceLang === "auto" ? undefined : sourceLang,
       targetLanguage: targetLang,
+      extractWords: extractWords,
     });
   };
 

@@ -8,7 +8,8 @@ const openai = new OpenAI({
 export async function translateAndExtractWords(
   text: string,
   sourceLanguage: string = "auto",
-  targetLanguage: string = "zh"
+  targetLanguage: string = "zh",
+  extractWords: boolean = true
 ): Promise<{
   originalText: string;
   translatedText: string;
@@ -26,7 +27,8 @@ export async function translateAndExtractWords(
       messages: [
         {
           role: "system",
-          content: `You are a language learning assistant. Your task is to:
+          content: extractWords ? 
+            `You are a language learning assistant. Your task is to:
 1. Translate the given text from ${sourceLanguage} to ${targetLanguage}
 2. Extract important vocabulary words from the original text
 3. Provide pronunciation, meaning, and example sentences for each word
@@ -45,6 +47,16 @@ Respond with JSON in this exact format:
       "importance": number
     }
   ]
+}` :
+            `You are a translation assistant. Your task is to:
+1. Translate the given text from ${sourceLanguage} to ${targetLanguage}
+2. Provide an accurate and natural translation
+
+Respond with JSON in this exact format:
+{
+  "originalText": "string",
+  "translatedText": "string",
+  "extractedWords": []
 }`
         },
         {

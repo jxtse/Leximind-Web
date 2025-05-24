@@ -43,6 +43,7 @@ export const translationRequestSchema = z.object({
   text: z.string().min(1).max(1000),
   sourceLanguage: z.string().optional(),
   targetLanguage: z.string().default("zh"),
+  extractWords: z.boolean().default(true),
 });
 
 export const themeGenerationSchema = z.object({
