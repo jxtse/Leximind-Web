@@ -56,7 +56,7 @@ export default function Home() {
             </p>
             <div className="flex items-center space-x-4 text-sm">
               <a
-                href="https://github.com/yourusername/leximind"
+                href="https://github.com/jxtse/Leximind-Web"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:text-primary/80 transition-colors flex items-center space-x-1"
@@ -65,7 +65,7 @@ export default function Home() {
               </a>
               <span className="text-muted-foreground">|</span>
               <a
-                href="https://github.com/yourusername/leximind/issues"
+                href="https://github.com/jxtse/Leximind-Web/issues"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground transition-colors"

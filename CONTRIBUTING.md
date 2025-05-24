@@ -13,8 +13,8 @@
 
 1. **Fork 并克隆项目**
 ```bash
-git clone https://github.com/yourusername/leximind.git
-cd leximind
+git clone https://github.com/jxtse/Leximind-Web.git
+cd Leximind-Web
 ```
 
 2. **安装依赖**
@@ -42,7 +42,7 @@ npm run dev
 ## 🤝 如何贡献
 
 ### 报告 Bug
-1. 在 [Issues](https://github.com/yourusername/leximind/issues) 中搜索是否已有相同问题
+1. 在 [Issues](https://github.com/jxtse/Leximind-Web/issues) 中搜索是否已有相同问题
 2. 如果没有，请创建新的 Issue，并提供：
    - 清晰的问题描述
    - 重现步骤
@@ -129,8 +129,8 @@ leximind/
 
 ## 📞 联系方式
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/leximind/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/leximind/discussions)
+- **Issues**: [GitHub Issues](https://github.com/jxtse/Leximind-Web/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/jxtse/Leximind-Web/discussions)
 
 ## 📄 许可证
 

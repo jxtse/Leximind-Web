@@ -60,8 +60,8 @@
 
 1. **克隆项目**
 ```bash
-git clone https://github.com/yourusername/leximind.git
-cd leximind
+git clone https://github.com/jxtse/Leximind-Web.git
+cd Leximind-Web
 ```
 
 2. **安装依赖**
@@ -173,7 +173,7 @@ npm run build
 
 如果您有任何问题或建议，请通过以下方式联系：
 
-- 项目Issues: [GitHub Issues](https://github.com/yourusername/leximind/issues)
+- 项目Issues: [GitHub Issues](https://github.com/jxtse/Leximind-Web/issues)
 - 邮箱: your.email@example.com
 
 ---

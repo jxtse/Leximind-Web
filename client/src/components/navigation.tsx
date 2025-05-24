@@ -63,7 +63,7 @@ export function Navigation({ activeTab, onTabChange, totalWords }: NavigationPro
             <Button 
               variant="ghost" 
               size="icon"
-              onClick={() => window.open('https://github.com/yourusername/leximind', '_blank')}
+              onClick={() => window.open('https://github.com/jxtse/Leximind-Web', '_blank')}
               title="查看GitHub项目"
             >
               <Github className="h-5 w-5" />
@@ -87,7 +87,7 @@ export function Navigation({ activeTab, onTabChange, totalWords }: NavigationPro
                     <Button 
                       variant="ghost" 
                       className="w-full justify-start"
-                      onClick={() => window.open('https://github.com/yourusername/leximind', '_blank')}
+                      onClick={() => window.open('https://github.com/jxtse/Leximind-Web', '_blank')}
                     >
                       <Github className="h-4 w-4 mr-2" />
                       GitHub项目
