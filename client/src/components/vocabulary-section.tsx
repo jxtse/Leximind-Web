@@ -82,10 +82,10 @@ export function VocabularySection() {
   };
 
   return (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between">
+    <div className="space-y-6 lg:space-y-8">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">我的生词本</h1>
+          <h1 className="text-2xl lg:text-3xl font-bold text-foreground mb-2">我的生词本</h1>
           <p className="text-muted-foreground">管理您收集的词汇，跟踪学习进度</p>
         </div>
         <div className="flex items-center space-x-4">
@@ -108,7 +108,7 @@ export function VocabularySection() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
@@ -169,7 +169,7 @@ export function VocabularySection() {
       {/* Word List */}
       <Card>
         <CardContent className="p-0">
-          <div className="p-6 border-b">
+          <div className="p-4 lg:p-6 border-b">
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-semibold text-foreground">词汇列表</h2>
               <div className="flex items-center space-x-2">

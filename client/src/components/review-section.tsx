@@ -92,9 +92,9 @@ export function ReviewSection() {
 
   if (reviewWords.length === 0) {
     return (
-      <div className="space-y-8">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">复习记忆</h1>
+      <div className="space-y-6 lg:space-y-8">
+        <div className="text-center lg:text-left">
+          <h1 className="text-2xl lg:text-3xl font-bold text-foreground mb-2">复习记忆</h1>
           <p className="text-muted-foreground">基于艾宾浩斯遗忘曲线的智能复习系统</p>
         </div>
 
@@ -116,16 +116,16 @@ export function ReviewSection() {
   }
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold text-foreground mb-2">复习记忆</h1>
+    <div className="space-y-6 lg:space-y-8">
+      <div className="text-center lg:text-left">
+        <h1 className="text-2xl lg:text-3xl font-bold text-foreground mb-2">复习记忆</h1>
         <p className="text-muted-foreground">基于艾宾浩斯遗忘曲线的智能复习系统</p>
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2">
+      <div className="grid xl:grid-cols-3 gap-6 lg:gap-8">
+        <div className="xl:col-span-2">
           <Card>
-            <CardContent className="p-8">
+            <CardContent className="p-6 lg:p-8">
               <div className="text-center">
                 <div className="mb-6">
                   <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 mb-4">

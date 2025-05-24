@@ -114,13 +114,13 @@ export function ThemeSection() {
   ];
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold text-foreground mb-2">主题词汇生成</h1>
+    <div className="space-y-6 lg:space-y-8">
+      <div className="text-center lg:text-left">
+        <h1 className="text-2xl lg:text-3xl font-bold text-foreground mb-2">主题词汇生成</h1>
         <p className="text-muted-foreground">根据特定主题或场景，智能生成相关词汇帮助您提前学习</p>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-8">
+      <div className="grid xl:grid-cols-2 gap-6 lg:gap-8">
         <div className="space-y-6">
           <Card>
             <CardContent className="p-6">
