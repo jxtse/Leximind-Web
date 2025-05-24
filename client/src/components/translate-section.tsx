@@ -74,7 +74,7 @@ export function TranslateSection() {
         nextReview: new Date(),
       });
 
-      setAddedWords(prev => new Set([...prev, word.text]));
+      setAddedWords(prev => new Set(Array.from(prev).concat(word.text)));
       
       toast({
         title: "添加成功",

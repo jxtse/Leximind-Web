@@ -70,7 +70,7 @@ export function ThemeSection() {
         nextReview: new Date(),
       });
 
-      setAddedWords(prev => new Set([...prev, word.text]));
+      setAddedWords(prev => new Set(Array.from(prev).concat(word.text)));
       
       toast({
         title: "添加成功",
@@ -212,7 +212,7 @@ export function ThemeSection() {
         </div>
 
         <Card>
-          <CardContent className="p-6">
+          <CardContent className="p-6 lg:p-8">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold text-foreground">生成的词汇列表</h2>
               {result && (
