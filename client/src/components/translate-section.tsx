@@ -143,43 +143,58 @@ export function TranslateSection() {
               </div>
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <Select value={sourceLang} onValueChange={setSourceLang}>
-                  <SelectTrigger className="w-32">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="auto">自动检测</SelectItem>
-                    <SelectItem value="en">英语</SelectItem>
-                    <SelectItem value="zh">中文</SelectItem>
-                    <SelectItem value="ja">日语</SelectItem>
-                    <SelectItem value="ko">韩语</SelectItem>
-                  </SelectContent>
-                </Select>
-                <ArrowLeftRight className="h-4 w-4 text-muted-foreground" />
-                <Select value={targetLang} onValueChange={setTargetLang}>
-                  <SelectTrigger className="w-32">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="zh">中文</SelectItem>
-                    <SelectItem value="en">英语</SelectItem>
-                    <SelectItem value="ja">日语</SelectItem>
-                    <SelectItem value="ko">韩语</SelectItem>
-                  </SelectContent>
-                </Select>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <Select value={sourceLang} onValueChange={setSourceLang}>
+                    <SelectTrigger className="w-32">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="auto">自动检测</SelectItem>
+                      <SelectItem value="en">英语</SelectItem>
+                      <SelectItem value="zh">中文</SelectItem>
+                      <SelectItem value="ja">日语</SelectItem>
+                      <SelectItem value="ko">韩语</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <ArrowLeftRight className="h-4 w-4 text-muted-foreground" />
+                  <Select value={targetLang} onValueChange={setTargetLang}>
+                    <SelectTrigger className="w-32">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="zh">中文</SelectItem>
+                      <SelectItem value="en">英语</SelectItem>
+                      <SelectItem value="ja">日语</SelectItem>
+                      <SelectItem value="ko">韩语</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
+              
+              <div className="flex items-center space-x-3">
+                <Switch 
+                  id="extract-words" 
+                  checked={extractWords} 
+                  onCheckedChange={setExtractWords}
+                />
+                <Label htmlFor="extract-words" className="text-sm font-medium text-foreground">
+                  提取重要词汇到生词本
+                </Label>
+              </div>
+
               <Button 
                 onClick={handleTranslate}
                 disabled={translateMutation.isPending}
+                className="w-full"
               >
                 {translateMutation.isPending ? (
                   <>正在翻译...</>
                 ) : (
                   <>
                     <Play className="h-4 w-4 mr-2" />
-                    翻译
+                    {extractWords ? "翻译并提取词汇" : "仅翻译"}
                   </>
                 )}
               </Button>
@@ -205,49 +220,51 @@ export function TranslateSection() {
                   </p>
                 </div>
 
-                <div className="space-y-3">
-                  <h3 className="text-sm font-semibold text-foreground flex items-center">
-                    <span className="text-warning mr-2">⭐</span>
-                    重要词汇提取
-                  </h3>
-                  
-                  <div className="space-y-2">
-                    {result.extractedWords.map((word, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 bg-muted rounded-lg hover:bg-muted/80 transition-colors">
-                        <div className="flex-1">
-                          <div className="flex items-center space-x-3">
-                            <span className="font-medium text-foreground">{word.text}</span>
-                            {word.pronunciation && (
-                              <span className="text-sm text-muted-foreground">{word.pronunciation}</span>
+                {result.extractedWords && result.extractedWords.length > 0 && (
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-semibold text-foreground flex items-center">
+                      <span className="text-warning mr-2">⭐</span>
+                      重要词汇提取
+                    </h3>
+                    
+                    <div className="space-y-2">
+                      {result.extractedWords.map((word, index) => (
+                        <div key={index} className="flex items-center justify-between p-3 bg-muted rounded-lg hover:bg-muted/80 transition-colors">
+                          <div className="flex-1">
+                            <div className="flex items-center space-x-3">
+                              <span className="font-medium text-foreground">{word.text}</span>
+                              {word.pronunciation && (
+                                <span className="text-sm text-muted-foreground">{word.pronunciation}</span>
+                              )}
+                            </div>
+                            <p className="text-sm text-muted-foreground mt-1">{word.meaning}</p>
+                            {word.example && (
+                              <p className="text-xs text-muted-foreground mt-1 italic">{word.example}</p>
                             )}
                           </div>
-                          <p className="text-sm text-muted-foreground mt-1">{word.meaning}</p>
-                          {word.example && (
-                            <p className="text-xs text-muted-foreground mt-1 italic">{word.example}</p>
-                          )}
+                          <Button
+                            size="sm"
+                            onClick={() => handleAddWord(word)}
+                            disabled={addedWords.has(word.text)}
+                            className={addedWords.has(word.text) ? "bg-muted text-muted-foreground" : ""}
+                          >
+                            {addedWords.has(word.text) ? (
+                              <>
+                                <Check className="h-3 w-3 mr-1" />
+                                已添加
+                              </>
+                            ) : (
+                              <>
+                                <Plus className="h-3 w-3 mr-1" />
+                                添加
+                              </>
+                            )}
+                          </Button>
                         </div>
-                        <Button
-                          size="sm"
-                          onClick={() => handleAddWord(word)}
-                          disabled={addedWords.has(word.text)}
-                          className={addedWords.has(word.text) ? "bg-muted text-muted-foreground" : ""}
-                        >
-                          {addedWords.has(word.text) ? (
-                            <>
-                              <Check className="h-3 w-3 mr-1" />
-                              已添加
-                            </>
-                          ) : (
-                            <>
-                              <Plus className="h-3 w-3 mr-1" />
-                              添加
-                            </>
-                          )}
-                        </Button>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
-                </div>
+                )}
               </>
             ) : (
               <div className="text-center py-8 text-muted-foreground">
