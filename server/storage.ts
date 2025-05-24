@@ -1,4 +1,6 @@
 import { words, type Word, type InsertWord } from "@shared/schema";
+import { db } from "./db";
+import { eq, lte, sql } from "drizzle-orm";
 
 export interface IStorage {
   getWord(id: number): Promise<Word | undefined>;
@@ -10,61 +12,58 @@ export interface IStorage {
   updateWordReview(id: number, difficulty: string): Promise<Word | undefined>;
 }
 
-export class MemStorage implements IStorage {
-  private words: Map<number, Word>;
-  private currentId: number;
-
-  constructor() {
-    this.words = new Map();
-    this.currentId = 1;
-  }
-
+export class DatabaseStorage implements IStorage {
   async getWord(id: number): Promise<Word | undefined> {
-    return this.words.get(id);
+    const [word] = await db.select().from(words).where(eq(words.id, id));
+    return word || undefined;
   }
 
   async getAllWords(): Promise<Word[]> {
-    return Array.from(this.words.values()).sort((a, b) => 
-      new Date(b.addedAt!).getTime() - new Date(a.addedAt!).getTime()
-    );
+    return await db.select().from(words).orderBy(words.addedAt);
   }
 
   async createWord(insertWord: InsertWord): Promise<Word> {
-    const id = this.currentId++;
-    const now = new Date();
-    const word: Word = { 
-      ...insertWord, 
-      id,
-      addedAt: now,
-      lastReviewed: null,
-      nextReview: now, // Available for immediate review
-    };
-    this.words.set(id, word);
+    const [word] = await db
+      .insert(words)
+      .values({
+        ...insertWord,
+        pronunciation: insertWord.pronunciation || null,
+        example: insertWord.example || null,
+        translation: insertWord.translation || null,
+        difficulty: insertWord.difficulty || 0,
+        reviewCount: insertWord.reviewCount || 0,
+        correctCount: insertWord.correctCount || 0,
+        nextReview: insertWord.nextReview || new Date(),
+      })
+      .returning();
     return word;
   }
 
   async updateWord(id: number, updates: Partial<Word>): Promise<Word | undefined> {
-    const word = this.words.get(id);
-    if (!word) return undefined;
-    
-    const updatedWord = { ...word, ...updates };
-    this.words.set(id, updatedWord);
-    return updatedWord;
+    const [word] = await db
+      .update(words)
+      .set(updates)
+      .where(eq(words.id, id))
+      .returning();
+    return word || undefined;
   }
 
   async deleteWord(id: number): Promise<boolean> {
-    return this.words.delete(id);
+    const result = await db.delete(words).where(eq(words.id, id));
+    return (result.rowCount || 0) > 0;
   }
 
   async getWordsForReview(): Promise<Word[]> {
     const now = new Date();
-    return Array.from(this.words.values())
-      .filter(word => new Date(word.nextReview!) <= now)
-      .sort((a, b) => new Date(a.nextReview!).getTime() - new Date(b.nextReview!).getTime());
+    return await db
+      .select()
+      .from(words)
+      .where(lte(words.nextReview, now))
+      .orderBy(words.nextReview);
   }
 
   async updateWordReview(id: number, difficulty: string): Promise<Word | undefined> {
-    const word = this.words.get(id);
+    const word = await this.getWord(id);
     if (!word) return undefined;
 
     const now = new Date();
@@ -88,8 +87,7 @@ export class MemStorage implements IStorage {
 
     const nextReview = new Date(now.getTime() + intervalDays * 24 * 60 * 60 * 1000);
 
-    const updatedWord: Word = {
-      ...word,
+    const updates = {
       difficulty: difficulty === "good" || difficulty === "easy" ? 
         Math.min((word.difficulty || 0) + 1, 4) : 
         Math.max((word.difficulty || 0) - 1, 0),
@@ -99,9 +97,8 @@ export class MemStorage implements IStorage {
       nextReview: nextReview,
     };
 
-    this.words.set(id, updatedWord);
-    return updatedWord;
+    return await this.updateWord(id, updates);
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
